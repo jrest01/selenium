@@ -22,17 +22,17 @@ class MercadoLibreTest(unittest.TestCase):
         mercadolibre.location_filter()
 
         mercadolibre.pricing_order()
-        # mercadolibre.select_first_five()
+        mercadolibre.select_first_five()
         mercadolibre.first_five_names_prices()
         # time.sleep(5)
 
 
-    # @classmethod
-    # def tearDownClass(cls):
-    #     """
-    #         Driver exit
-    #     """
-    #     cls.driver.close()
+    @classmethod
+    def tearDownClass(cls):
+        """
+            Driver exit
+        """
+        cls.driver.close()
 
 
 if __name__ == '__main__':

@@ -28,6 +28,9 @@ class MercadoLibre(object):
         self._driver.get(self._url)
 
     def select_country(self, country = 'Colombia'):
+        """
+            select the country at the first page
+        """
         select_country = WebDriverWait(self._driver, 10).until(EC.element_to_be_clickable((By.LINK_TEXT, country)))
         select_country.click()
 
@@ -47,21 +50,33 @@ class MercadoLibre(object):
         search_field.submit()
 
     def search(self, keyword):
+        """
+            makes the process of search full
+        """
         self.type_search(keyword)
         self.click_submit()
 
     def condition_filter(self, condition = 'nuevo'):
+        """
+            search the button to filter the products for its condition
+        """
         condition = WebDriverWait(self._driver, 5).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root-app"]/div/div[2]/aside/section/div[7]/ul/li[1]/a/span[1]')))
         self._driver.execute_script("arguments[0].click();", condition)
 
 
     def location_filter(self, location = 'Antioquia'):
+        """
+            search the button to filter the products for its location
+        """
         location_button = WebDriverWait(self._driver,5).until(EC.element_to_be_clickable((By.PARTIAL_LINK_TEXT, location)))
         self._driver.execute_script("arguments[0].click();", location_button)
 
 
 
-    def pricing_order(self, option = 'Mayor precio'):
+    def pricing_order(self):
+        """
+            seachrs the button to order the products for higher price
+        """
         order = self._driver.find_element(By.XPATH, '//*[@id="root-app"]/div/div[2]/section/div[2]/div[2]/div/div/div[2]/div/div/button')
         order.click()
         select_option = WebDriverWait(self._driver, 5).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="andes-dropdown-más-relevantes-list-option-price_desc"]/div/div/span')))
@@ -69,6 +84,9 @@ class MercadoLibre(object):
 
 
     def select_first_five(self):
+        """
+            saves the first five products 
+        """
         first_five = []
 
         for i in range(0,5):
@@ -78,7 +96,10 @@ class MercadoLibre(object):
         x = first_five[2]
         self._driver.execute_script("arguments[0].click();", x)
 
-    def first_five_names_prices(self):
+    def first_five_names_prices(self):        
+        """
+            saves the prices and names for the first five products 
+        """
         products = {}
 
         for i in range(0,5):
